@@ -1,21 +1,25 @@
-const http=require("http");
+const http=require('http');
 var express=require('express');
-var app=express();
 const bodyParser=require('body-parser');
+const fs=require('fs');
+
+var app=express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(function(req,res,next){
-    console.log("i am in the middle");
-    console.log(req.body);
-    next();
-});
 
 
 app.get('/',function(req,res){
-    res.send('Hello World');
+    file=fs.readFileSync('./index.html')
+    res.write(file);
+    res.end();
 });
-app.post('/',function(req,res){
-    res.send('<h1>Hello World from Post</h1>');
+app.post('/index.js',function(req,res){
+    //res.send(`<h1>Hello ${req.body} </h1>`);
+    console.log("in the post method");
+    res.send(`<h1>Hello ${req.body.username}</h1>`)
+    console.log(req.body);
+    res.end();
+    
 });
 app.put('/',function(req,res){
     res.send('<h1>Hello World from Put</h1>');
@@ -34,4 +38,4 @@ const site=http.createServer(function(req,res){
     console.log(req.headers);
 
 })*/
-app.listen(3000);
+app.listen(80);
