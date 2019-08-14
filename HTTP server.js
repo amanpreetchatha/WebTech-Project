@@ -10,10 +10,10 @@ function handler(req,res){
     }else if(req.method==='POST'){
         res.write("<h1>This is a POST request</h1>");
     }else if(req.method==='PUT'){
-        res.write("<h1>This is a POST request</h1>");
+        res.write("<h1>This is a PUT request</h1>");
     }
     else if(req.method='DELETE'){
-        res.write("<h1>This is a POST request</h1>");
+        res.write("<h1>This is a DELETE request</h1>");
     }
     res.end();
     
