@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Server demo</title>
+</head>
+<body>
+    
+    <input type="button" name="team" value="View Members" id="view">
+    <input type="button" name="team" value="Add Members" id="add">
+    <input type="button" name="team" value="Delete Members" id="delete">
+    <div id="mydiv">
+        <form method="" action="" id="form">
+        <input type="text" placeholder="Enter name" name="name" value="">
+        <input type="submit">
+        </form>
+    </div>
+    
+</body>
+<script>
+    const mydiv=document.querySelector('#mydiv');
+    mydiv.style.display='none';
+    form=document.querySelector('#form');
+    const viewteam=document.querySelector('#view');
+    viewteam.addEventListener('click',(event)=>{
+        form.setAttribute('method','GET');
+        form.setAttribute('action','viewteam');
+        mydiv.style.display='block';
+    });
+
+    const add=document.querySelector('#add');
+    add.addEventListener('click',(event)=>{
+        form.setAttribute('method','PUT');
+        form.setAttribute('action','addmember');
+        mydiv.style.display='block';
+    });
+    const del=document.querySelector('#delete');
+    del.addEventListener('click',(event)=>{
+        form.setAttribute('method','DELETE');
+        form.setAttribute('action','deletemember');
+        mydiv.style.display='block';
+    });
+</script>
+</html>

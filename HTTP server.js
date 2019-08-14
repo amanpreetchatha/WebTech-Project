@@ -1,7 +1,6 @@
 const http=require('http');
 const fs=require('fs');
-
-let team=[];
+var team={ name:'', members: []}
 
 function handler(req,res){
     
@@ -25,14 +24,22 @@ function handler(req,res){
         }
     }else if(req.method==="POST"){
         let body;
-        req.on('data',data=>{
-            name=data.toString();
-            console.log(data.toString());
-            team.push(name.slice(name.indexOf('=')+1,name.length));
+        if(req.url==='/create'){
             
-        });
-        res.write('<h2>Member added to the team</h2><br><a href="/team">View Members</a>');
-        res.end();
+            req.on('data',data=>{
+                name=data.toString();
+                
+                team.name=name.slice(name.indexOf('=')+1,name.length);
+                
+                
+            });
+            res.end();
+            console.log(team.name);
+            
+            
+            
+                
+        }
         /*
         if(member.length!=0){
             team.push(member);
@@ -40,9 +47,22 @@ function handler(req,res){
             res.end();
         }*/
         
-        res.end();
+        
+    }else if(req.method='DELETE'){
+            if(req.url='/deleteteam'){
+                req.on('data',data=>{
+                    name=data.toString();
+                    
+                    team.name=name.slice(name.indexOf('=')+1,name.length);
+                    
+                    
+                });
+                res.end();
+                console.log(team.name);
+                
+
+        }
     }
-    
     res.end();
 }
 
@@ -50,3 +70,13 @@ function handler(req,res){
 const server=http.createServer(handler);
 
 server.listen(80);
+
+
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+  }
