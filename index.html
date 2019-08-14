@@ -7,10 +7,26 @@
     <title>Server demo</title>
 </head>
 <body>
-    <form method="POST" action="/">
-        <input type="text" placeholder="Enter your name" name="username" value="">
-        <input type="submit">
-    </form>
+    
+    <input type="radio" name="team" value="create" id="create">Create Team &nbsp;&nbsp;
+    <input type="radio" name="team" value="add" id="add">Add Members&nbsp;&nbsp;
+    <input type="radio" name="team" value="delete" id="delete">Delete Members
+    <div id="mydiv"></div>
     
 </body>
+<script>
+    const createteam=document.querySelector('#create');
+    const mydiv=document.querySelector('#mydiv');
+    createteam.addEventListener('change',(event)=>{
+        
+    });
+    const add=document.querySelector('#add');
+    add.addEventListener('change',(event)=>{
+
+    });
+    const del=document.querySelector('#delete');
+    del.addEventListener('change',(event)=>{
+
+    });
+</script>
 </html>
