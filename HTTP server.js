@@ -1,10 +1,8 @@
 const http=require('http');
-const fs=require('fs');
-const {parse}=require('querystring');
-let members= [];
 
 function handler(req,res){
     
+    res.setHeader('Content-Type','text/html')
     if(req.method==='GET'){
         res.write("<h1>This is a GET request</h1>");
     }else if(req.method==='POST'){
@@ -22,5 +20,5 @@ function handler(req,res){
 
 const server=http.createServer(handler);
 
-server.listen(80);
+server.listen();
 
