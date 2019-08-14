@@ -1,69 +1,40 @@
 const http=require('http');
 const fs=require('fs');
-var team={ name:'', members: []}
+let members= [];
 
 function handler(req,res){
     
     if(req.method==='GET'){
-        if(req.url==='/team'){
-            if(team.length!=0){
-                res.write("<h1>Team Members</h1>");
-                res.write(`<li>${team}</li>`);
-                res.end();    
-            }
-            else{
-                res.write('<h2>No members in the team</h2>');
-                res.end();
-            }
-            
+        if(members.length!=0){
+            res.write("<h1>Team Members</h1>");
+            forEach(mem , members)
+            res.write(`<li>${mem}</li>`);
+            res.end();    
         }
         else{
-            file=fs.readFileSync('./index.html');
+            file=fs.readFileSync('index.html');
             res.write(file);
             res.end();
         }
-    }else if(req.method==="POST"){
-        let body;
-        if(req.url==='/create'){
-            
-            req.on('data',data=>{
-                name=data.toString();
-                
-                team.name=name.slice(name.indexOf('=')+1,name.length);
-                
-                
-            });
-            res.end();
-            console.log(team.name);
-            
-            
-            
-                
-        }
-        /*
-        if(member.length!=0){
-            team.push(member);
-            res.write('<h3>Member added</h3>');
-            res.end();
-        }*/
-        
-        
-    }else if(req.method='DELETE'){
-            if(req.url='/deleteteam'){
-                req.on('data',data=>{
-                    name=data.toString();
-                    
-                    team.name=name.slice(name.indexOf('=')+1,name.length);
-                    
-                    
-                });
-                res.end();
-                console.log(team.name);
-                
-
-        }
+    }else if(req.method==='POST' || req.method==='PUT'){
+        req.on('data',data=>{
+            name=data.toString();
+            members.push(name.slice(name.indexOf('=')+1,name.length));
+            res.write(members.length);
+        });
+        res.end();
+        console.log(members);
     }
-    res.end();
+    else if(req.method='DELETE'){
+        req.on('data',data=>{
+            name=data.toString();
+            if(i=members.indexOf(name.slice(name.indexOf('=')+1,name.length))!=-1){
+               delete members[i];
+           }            
+        });
+        res.end();
+        console.log(members);
+    }
 }
 
 
